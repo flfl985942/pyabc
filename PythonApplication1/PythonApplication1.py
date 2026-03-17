@@ -396,25 +396,3 @@ def login_and_run():
             waiter.start()
 
             # 主线程周期性保存 localStorage 到本地文件（安全：在主线程调用 page.evaluate）
-            try:
-                while not stop_event.is_set():
-                    save_snapshot(page)
-                    # 每 5 秒保存一次
-                    for _ in range(5):
-                        if stop_event.is_set():
-                            break
-                        time.sleep(1)
-            finally:
-                # 退出前做一次最终保存
-                try:
-                    save_snapshot(page)
-                except Exception:
-                    pass
-
-        except Exception as e:
-            print(f">>> 运行中发生错误: {e}")
-        finally:
-            browser.close()
-
-if __name__ == "__main__":
-    login_and_run()
