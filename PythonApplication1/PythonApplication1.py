@@ -388,11 +388,4 @@ def login_and_run():
             print(">>> 已注入：自定义下拉已启用，点击选择时不会被立即隐藏。")
 
             # 启动一个只等待用户输入的线程（不会触碰 page）
-            stop_event = threading.Event()
-            def wait_for_user():
-                input(">>> 正在运行中。如需退出请回到此处按回车...")
-                stop_event.set()
-            waiter = threading.Thread(target=wait_for_user, daemon=True)
-            waiter.start()
-
-            # 主线程周期性保存 localStorage 到本地文件（安全：在主线程调用 page.evaluate）
+  
